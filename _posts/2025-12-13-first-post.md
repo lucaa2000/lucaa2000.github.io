@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Der Wal und das Ende der Welt
+title: "Der Wal und das Ende der Welt"
 date: 2025-12-14 21:09 +0100
 ---
 
@@ -16,4 +16,4 @@ Ein bisschen naiv ist das Buch technisch gesehen natürlich schon. Ein System, s
 
 Aber, das macht das Buch keineswegs schlechter. Es ist immernoch akkurat genug um glaubwürdig zu sein und hilft einfach der Erzählung und dem Konflikt des Protagonisten.
 
-Ich wünschte ich hätte diesen Text früher geschrieben. Das Buch hat mich so sehr gepackt, doch jetzt, nach circa einem Monat, habe ich schon wieder einiges vergessen. So ist das halt. Sehr große Empfehlung an alle, auf jeden Fall! Over n' out!
+Ich wünschte ich hätte diesen Text früher geschrieben. Das Buch hat mich so sehr gepackt, doch jetzt, nach circa einem Monat, habe ich schon wieder einiges vergessen. So ist das halt. Sehr große Empfehlung an alle, auf jeden Fall! Over n' out!!
