@@ -16,7 +16,7 @@ timezone: Europe/Berlin
 
 title: Luca # the main title
 
-tagline: My personal website. For now, I am not sure what will end up here :) # it will display as the subtitle
+tagline: My personal website. For now, I am not sure what will end up happening here :) # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
   A minimal, responsive and feature-rich Jekyll theme for technical writing.
@@ -34,15 +34,16 @@ twitter:
 social:
   # Change to your full name.
   # It will be displayed as the default author of the posts and the copyright owner in the Footer
-  name: your_full_name
-  email: example@domain.com # change to your email address
+  name: Luca Deuschel
+  email: lucadeuschel@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/username # change to your Twitter homepage
-    - https://github.com/username # change to your GitHub homepage
+    #- https://twitter.com/not_available # change to your Twitter homepage
+    - https://github.com/lucaa2000 # change to your GitHub homepage
     # Uncomment below to add more social links
     # - https://www.facebook.com/username
-    # - https://www.linkedin.com/in/username
+    - https://www.linkedin.com/in/luca-deuschel-556282238
+    - https://www.goodreads.com/user/show/151402161-luca-deuschel
 
 # Site Verification Settings
 webmaster_verifications:
@@ -98,7 +99,7 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar:
+avatar: /assets/img/avatar.jpg 
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
