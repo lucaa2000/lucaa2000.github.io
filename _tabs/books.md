@@ -18,21 +18,29 @@ order: 5
     background-color: var(--card-hover-bg);
   }
 
+  .book-cover,
+  .book-cover-placeholder {
+    width: 6.75rem;
+    height: 10.125rem;
+    background: var(--img-bg);
+    border-radius: 0.625rem;
+  }
+
+  .book-cover-column {
+    flex: 0 0 7.75rem;
+  }
+
   .book-cover {
-    width: 100%;
-    max-height: 10rem;
+    box-sizing: border-box;
+    padding: 0.375rem;
     object-fit: contain;
   }
 
   .book-cover-placeholder {
     display: flex;
-    width: 100%;
-    height: 9.375rem;
     align-items: center;
     justify-content: center;
     color: var(--text-muted-color);
-    background: var(--img-bg);
-    border-radius: 0.3125rem;
   }
 
   .book-card .card-title a {
@@ -55,7 +63,7 @@ order: 5
   <div class="col">
     <article class="book-card">
       <div class="row g-0 h-100">
-        <div class="col-4 d-flex align-items-center justify-content-center p-2">
+        <div class="book-cover-column d-flex align-items-center justify-content-center p-2">
           {% if book.image_url %}
           <img
             src="{{ book.image_url | escape }}"
@@ -66,7 +74,7 @@ order: 5
           <div class="book-cover-placeholder">No cover</div>
           {% endif %}
         </div>
-        <div class="col-8">
+        <div class="col">
           <div class="card-body p-3">
             <h2 class="card-title fs-5">
               <a href="{{ book.link | escape }}" rel="noopener noreferrer" class="text-decoration-none">
