@@ -2,7 +2,6 @@
 # the default layout is 'page'
 icon: fas fa-info-circle
 order: 6
-
 ---
 
 I'm Luca, a Scientific Computing M.Sc. student at Technical University Berlin with a passion for mathematics and software development.

@@ -16,10 +16,10 @@ timezone: Europe/Berlin
 
 title: Luca # the main title
 
-tagline: My personal website. For now, I am not sure what will end up happening here :) # it will display as the subtitle
+tagline: Notes on software, mathematics, and books # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  A minimal, responsive and feature-rich Jekyll theme for technical writing.
+  Luca Deuschel's personal website about scientific computing, software development, and books.
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
@@ -27,9 +27,6 @@ url: "https://lucaa2000.github.io" # the base hostname & protocol for your site
 
 github:
   username: lucaa2000 # change to your GitHub username
-
-twitter:
-  username: not available # change to your Twitter username
 
 social:
   # Change to your full name.
@@ -99,7 +96,7 @@ theme_mode: # [light | dark]
 cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: /assets/img/avatar.jpg 
+avatar: /assets/img/avatar.jpg
 
 # The URL of the site-wide social preview image used in SEO `og:image` meta tag.
 # It can be overridden by a customized `page.image` in front matter.
