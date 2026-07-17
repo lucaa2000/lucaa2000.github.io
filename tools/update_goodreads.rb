@@ -7,11 +7,23 @@ require "time"
 require "uri"
 require "yaml"
 
-FEED_URL = "https://www.goodreads.com/review/list_rss/151402161?shelf=read"
-OUTPUT_PATH = File.expand_path("../_data/goodreads_books.yml", __dir__)
+FEEDS = [
+  {
+    url: "https://www.goodreads.com/review/list_rss/151402161?shelf=read",
+    output_path: File.expand_path("../_data/goodreads_books.yml", __dir__),
+    date_element: "user_read_at",
+    date_key: "date_read"
+  },
+  {
+    url: "https://www.goodreads.com/review/list_rss/151402161?shelf=currently-reading",
+    output_path: File.expand_path("../_data/goodreads_currently_reading.yml", __dir__),
+    date_element: "user_date_added",
+    date_key: "date_added"
+  }
+].freeze
 
-def fetch_feed
-  uri = URI(FEED_URL)
+def fetch_feed(feed_url)
+  uri = URI(feed_url)
   connection = Net::HTTP.new(uri.host, uri.port)
   connection.use_ssl = true
   connection.open_timeout = 5
@@ -36,39 +48,42 @@ rescue URI::InvalidURIError
   nil
 end
 
-source_path = ARGV.first
-xml = source_path ? File.read(source_path) : fetch_feed
-document = REXML::Document.new(xml)
+source_paths = ARGV
 
-books = REXML::XPath.match(document, "//item").filter_map do |item|
-  title = text(item, "title")
-  author = text(item, "author_name")
-  link = https_url(text(item, "link"))
-  next if title.nil? || title.empty? || author.nil? || author.empty? || link.nil?
+FEEDS.each_with_index do |feed, index|
+  xml = source_paths[index] ? File.read(source_paths[index]) : fetch_feed(feed[:url])
+  document = REXML::Document.new(xml)
 
-  rating = Integer(text(item, "user_rating") || 0, exception: false).to_i.clamp(0, 5)
+  books = REXML::XPath.match(document, "//item").filter_map do |item|
+    title = text(item, "title")
+    author = text(item, "author_name")
+    link = https_url(text(item, "link"))
+    next if title.nil? || title.empty? || author.nil? || author.empty? || link.nil?
 
-  {
-    "title" => title,
-    "author" => author,
-    "link" => link,
-    "image_url" => https_url(text(item, "book_large_image_url") || text(item, "book_image_url")),
-    "rating" => rating,
-    "date_read" => text(item, "user_read_at")
-  }.compact
+    rating = Integer(text(item, "user_rating") || 0, exception: false).to_i.clamp(0, 5)
+
+    {
+      "title" => title,
+      "author" => author,
+      "link" => link,
+      "image_url" => https_url(text(item, "book_large_image_url") || text(item, "book_image_url")),
+      "rating" => rating,
+      feed[:date_key] => text(item, feed[:date_element])
+    }.compact
+  end
+
+  raise "Goodreads feed did not contain any valid books" if books.empty?
+
+  books.sort_by! do |book|
+    date = book[feed[:date_key]]
+    date ? Time.parse(date) : Time.at(0)
+  rescue ArgumentError
+    Time.at(0)
+  end
+  books.reverse!
+
+  temporary_path = "#{feed[:output_path]}.tmp"
+  File.write(temporary_path, YAML.dump(books))
+  File.rename(temporary_path, feed[:output_path])
+  puts "Updated #{feed[:output_path]} with #{books.length} books."
 end
-
-raise "Goodreads feed did not contain any valid books" if books.empty?
-
-books.sort_by! do |book|
-  date_read = book["date_read"]
-  date_read ? Time.parse(date_read) : Time.at(0)
-rescue ArgumentError
-  Time.at(0)
-end
-books.reverse!
-
-temporary_path = "#{OUTPUT_PATH}.tmp"
-File.write(temporary_path, YAML.dump(books))
-File.rename(temporary_path, OUTPUT_PATH)
-puts "Updated #{OUTPUT_PATH} with #{books.length} books."

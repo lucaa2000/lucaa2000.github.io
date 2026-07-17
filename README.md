@@ -19,14 +19,14 @@ bash tools/test.sh
 
 ## Updating the books page
 
-The books page is generated from the committed `_data/goodreads_books.yml` snapshot. Refresh it from Luca's public Goodreads RSS feed, review the diff, and commit it with:
+The books page is generated from the committed Goodreads snapshots in `_data/`. Refresh both the read and currently-reading shelves from Luca's public Goodreads RSS feeds, review the diff, and commit them with:
 
 ```shell
 bundle exec ruby tools/update_goodreads.rb
-git diff -- _data/goodreads_books.yml
+git diff -- _data/goodreads_books.yml _data/goodreads_currently_reading.yml
 ```
 
-Keeping the snapshot in the repository makes site builds reproducible and prevents a Goodreads outage from breaking a deployment.
+The snapshots are updated manually; keeping them in the repository makes site builds reproducible and prevents a Goodreads outage from breaking a deployment.
 
 ## Deployment
 

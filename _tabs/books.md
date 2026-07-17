@@ -53,10 +53,46 @@ order: 5
 </style>
 
 <p>
-  Books I have read, sourced from
+  Books I am currently reading and books I have read, sourced from
   <a href="https://www.goodreads.com/user/show/151402161-luca-deuschel" rel="noopener noreferrer">my Goodreads profile</a>.
 </p>
 
+{% if site.data.goodreads_currently_reading and site.data.goodreads_currently_reading.size > 0 %}
+<h2>Currently reading</h2>
+<div class="row row-cols-1 row-cols-md-2 g-4">
+  {% for book in site.data.goodreads_currently_reading %}
+  <div class="col">
+    <article class="book-card">
+      <div class="row g-0 h-100">
+        <div class="book-cover-column d-flex align-items-center justify-content-center p-2">
+          {% if book.image_url %}
+          <img
+            src="{{ book.image_url | escape }}"
+            class="book-cover rounded"
+            alt="Cover of {{ book.title | escape }}"
+          >
+          {% else %}
+          <div class="book-cover-placeholder">No cover</div>
+          {% endif %}
+        </div>
+        <div class="col">
+          <div class="card-body p-3">
+            <h2 class="card-title fs-5">
+              <a href="{{ book.link | escape }}" rel="noopener noreferrer" class="text-decoration-none">
+                {{ book.title | escape }}
+              </a>
+            </h2>
+            <p class="card-text text-muted"><small>{{ book.author | escape }}</small></p>
+          </div>
+        </div>
+      </div>
+    </article>
+  </div>
+  {% endfor %}
+</div>
+{% endif %}
+
+<h2>Books I have read</h2>
 {% if site.data.goodreads_books and site.data.goodreads_books.size > 0 %}
 <div class="row row-cols-1 row-cols-md-2 g-4">
   {% for book in site.data.goodreads_books %}
